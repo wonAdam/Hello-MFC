@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloSDK", "HelloSDK\HelloSDK.vcxproj", "{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Debug|x64.ActiveCfg = Debug|x64
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Debug|x64.Build.0 = Debug|x64
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Debug|x86.ActiveCfg = Debug|Win32
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Debug|x86.Build.0 = Debug|Win32
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Release|x64.ActiveCfg = Release|x64
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Release|x64.Build.0 = Release|x64
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Release|x86.ActiveCfg = Release|Win32
+		{F1F0B5ED-82FC-495C-980E-6A7FBE706F1C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F16BA15-D728-4AA8-BE4B-B9A29C41D1B2}
+	EndGlobalSection
+EndGlobal
