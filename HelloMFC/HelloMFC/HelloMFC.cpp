@@ -37,7 +37,7 @@ BOOL CHelloApp::InitInstance()
 // 메인 윈도우 클래스를 정의합니다.
 CMainFrame::CMainFrame()
 {
-	Create(NULL, _T("HelloMFC"));
+	Create(NULL, _T("Hello World"), WS_CAPTION | WS_POPUPWINDOW | WS_MINIMIZE, CRect(0, 0, 500, 200));
 }
 
 void CMainFrame::OnPaint()
@@ -49,7 +49,11 @@ void CMainFrame::OnPaint()
 
 void CMainFrame::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	MessageBox(_T("마우스 클릭"), _T("마우스 메세지"));
+	theApp.m_pMainWnd->ShowWindow(SW_SHOWMAXIMIZED);
+	if (MessageBox(_T("종료하시겠습니까?"), _T("마우스 메세지"), MB_YESNOCANCEL | MB_ICONQUESTION) == IDYES)
+	{
+		DestroyWindow();
+	}
 }
 
 //---------- 메세지 맵 ----------//
