@@ -37,30 +37,20 @@ int main()
         {
             _tsetlocale(LC_ALL, ""); // 유니코드 한국어 출력에 필요
             
-            CString szFruits[] = {
-                _T("apple"), _T("grape"), _T("strawberry"), _T("plum"), _T("orange")
-            };
+            CMapStringToString map;
+            map[_T("apple")] = _T("JUICE");
+            map[_T("strawberry")] = _T("ICECREAM");
+            map[_T("grape")] = _T("WINE");
+            map[_T("milk")] = _T("TEA");
 
 
-            CStringList list;
-            for (int i = 0; i < 5; i++)
-                list.AddTail(szFruits[i]);
-
-            POSITION pos = list.GetHeadPosition();
+            POSITION pos = map.GetStartPosition();
             while (pos != NULL)
             {
-                CString str = list.GetNext(pos);
-                _tprintf(_T("%s "), str);
+                CString strKey, strValue;
+                map.GetNextAssoc(pos, strKey, strValue);
+                _tprintf(_T("%s -> %s\n"), strKey, strValue);
             }
-
-            _tprintf(_T("\n"));
-            pos = list.GetTailPosition();
-            while (pos != NULL)
-            {
-                CString str = list.GetPrev(pos);
-                _tprintf(_T("%s "), str);
-            }
-            _tprintf(_T("\n"));
 
             getchar();
         }
