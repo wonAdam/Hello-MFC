@@ -5,6 +5,7 @@
 #define IDS_APP_TITLE                   103
 #define IDS_TEST                        104
 #define IDS_LOAD                        105
+#define IDS_FORMAT                      106
 
 // Next default values for new objects
 // 
