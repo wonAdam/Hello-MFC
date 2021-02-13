@@ -72,8 +72,43 @@ int main()
             //str.Insert(str.GetLength(), answer);
             //MessageBox(NULL, str, _T("Workout Question 07"), MB_OK);
 
-            // 08.
+            //// 08. CRect 의 중심좌표 출력
+            //CRect rect(120, 60, 120+150, 60+210); // left top right bottom
+            //_tprintf("(%d, %d)", rect.CenterPoint().x, rect.CenterPoint().y);
 
+            //// 09. 왼쪽상단 (120, 60) 오른쪽하단(270, 270) 인 CRect를 생성한 후 크기를 출력
+            //CRect rect(120, 60, 270, 270);
+            //_tprintf("size: %d * %d = %d", rect.Width(), rect.Height(), rect.Size());
+
+            //// 10. CRect를 입력받고 해당 CRect를 47, 143만큼 이동시킨후 l, t, r, b출력
+            //int l, t, r, b;
+            //_tscanf_s(_T("%d %d %d %d"), &l, &t, &r, &b);
+            //CRect rect(l, t, r, b);
+            //rect.OffsetRect(47, 143);
+            //_tprintf(_T("%d, %d, %d, %d"), rect.left, rect.top, rect.right, rect.bottom);
+
+            //// 11. CRect와 CPoint를 각각 입력받고 CPoint가 CRect안에 있는지 출력
+            //int l, t, r, b;
+            //_tscanf_s(_T("%d %d %d %d"), &l, &t, &r, &b);
+            //CRect rect(l, t, r, b);
+
+            //int x, y;
+            //_tscanf_s(_T("%d %d"), &x, &y);
+            //CPoint point(x, y);
+
+            //CString str;
+            //if (rect.PtInRect(point)) str = _T("Inside");
+            //else str = _T("Outside");
+            //_tprintf("%s\n", str);
+
+            //// 13. CTime으로 현재 시각을 받아 날짜 시 분 초 출력
+            //CTime currTime = CTime::GetCurrentTime();
+            //_tprintf(_T("%s\n"), currTime.Format("%Y-%m-%d %H:%M:%S"));
+
+            //// 15. 오늘부터 1000일째 되는 기념일을 계산하여 날짜출력
+            //CTime currTime = CTime::GetCurrentTime();
+            //CTime oneThousandDayLater = currTime + 1000 * 24 * 60 * 60;
+            //_tprintf(_T("%s\n"), oneThousandDayLater.Format("%Y-%m-%d %H:%M:%S"));
 
             getchar();
         }
