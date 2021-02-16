@@ -6,7 +6,6 @@
 #include "Console.h"
 
 #include "locale.h"
-#include <string>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -109,6 +108,22 @@ int main()
             //CTime currTime = CTime::GetCurrentTime();
             //CTime oneThousandDayLater = currTime + 1000 * 24 * 60 * 60;
             //_tprintf(_T("%s\n"), oneThousandDayLater.Format("%Y-%m-%d %H:%M:%S"));
+
+            //// 16. 두수를 입력받아 두 수 사이의 값들의 합과 평균을 CUIntArray를 이용하여 출력
+            //int a, b;
+            //_tscanf_s(_T("%d %d"), &a, &b);
+            //CUIntArray arr;
+            //int sum = 0;
+            //for (int i = a; i <= b; i++)
+            //{
+            //    arr.Add(i);
+            //    sum += i;
+            //}
+            //_tprintf(_T("sum: %d / mean: %f\n"), sum, sum/(float)arr.GetSize());
+
+            // 20.
+            //CMap<CString, CString&, UINT, UINT&> map;
+
 
             getchar();
         }
