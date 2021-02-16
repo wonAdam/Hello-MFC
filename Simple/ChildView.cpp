@@ -38,8 +38,14 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 	cs.dwExStyle |= WS_EX_CLIENTEDGE;
 	cs.style &= ~WS_BORDER;
+
+	// 03
+	cs.style |= WS_HSCROLL;
+	cs.style |= WS_VSCROLL;
+
+	// 02
 	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS, 
-		::LoadCursor(nullptr, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), nullptr);
+		::LoadCursor(nullptr, IDC_HAND), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), nullptr);
 
 	return TRUE;
 }
@@ -48,9 +54,11 @@ void CChildView::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	
-	// TODO: Add your message handler code here
-	dc.TextOut(50, 50, CString(_T("Hello!")));
-	
+	// 14
+	CString str; 
+	::AfxGetMainWnd()->GetWindowText(str);
+	dc.TextOut(50, 50, str);
+		
 	// Do not call CWnd::OnPaint() for painting messages
 }
 

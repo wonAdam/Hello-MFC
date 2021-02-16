@@ -55,6 +55,26 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	//  the CREATESTRUCT cs
 
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
+	cs.dwExStyle |= WS_EX_TOPMOST;
+
+	// 08
+	cs.style |= WS_POPUPWINDOW;
+	cs.style |= WS_CAPTION;
+	cs.style |= WS_OVERLAPPEDWINDOW;
+
+	// 07
+	cs.x = 100;
+	cs.y = 200;
+	cs.cx = 1024;
+	cs.cy = 768;
+
+	// 04
+	//cs.style &= ~WS_SYSMENU;
+
+	// 05
+	/*cs.style &= ~WS_MINIMIZEBOX;
+	cs.style &= ~WS_MAXIMIZEBOX;*/
+
 	cs.lpszClass = AfxRegisterWndClass(0);
 	return TRUE;
 }

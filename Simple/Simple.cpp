@@ -67,17 +67,19 @@ BOOL CSimpleApp::InitInstance()
 	if (!pFrame)
 		return FALSE;
 	m_pMainWnd = pFrame;
+
 	// create and load the frame with its resources
 	pFrame->LoadFrame(IDR_MAINFRAME,
 		WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, nullptr,
 		nullptr);
 
 
-
-
-
 	// The one and only window has been initialized, so show and update it
-	pFrame->ShowWindow(SW_SHOW);
+	//pFrame->ShowWindow(SW_SHOW);
+	// 10
+	pFrame->ShowWindow(SW_SHOWMINIMIZED);
+	// 11
+	//pFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pFrame->UpdateWindow();
 	return TRUE;
 }
