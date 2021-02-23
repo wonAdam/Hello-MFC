@@ -25,6 +25,7 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -53,3 +54,15 @@ void CChildView::OnPaint()
 			dc.SetPixelV(x, y, RGB(x, y, 0));
 }
 
+
+// 09
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	CDC *dc = GetDC();
+	COLORREF ref = GetPixel(*dc, point.x, point.y);
+	CString str;
+	str.Format(_T("R=%d, G=%d, B=%d"), GetRValue(ref), GetGValue(ref), GetBValue(ref));
+	MessageBox(str, _T("DrawPoints"), MB_OK);
+
+	CWnd::OnLButtonDown(nFlags, point);
+}

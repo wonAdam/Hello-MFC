@@ -35,5 +35,16 @@ protected:
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+
+	// 03
+	CArray<CPoint, CPoint&> rectangles;
+	CArray<CPoint, CPoint&> ellipses;
+	// 04
+	CList<CPoint, CPoint&> rectanglesList;
+	CList<CPoint, CPoint&> ellipsesList;
+	// 05
+	CArray<CPoint, CPoint&> yellowBoxes;
+	CArray<CPoint, CPoint&> textPoses;
+
 };
 

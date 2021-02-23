@@ -48,10 +48,21 @@ void CChildView::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	
-	// TODO: Add your message handler code here
+	/*dc.Rectangle(0, 0, 200, 100);
+	dc.Ellipse(200, 100, 500, 200);*/
+
+	// 01
+	/*CRect rect(0, 0, 200, 100);
+	dc.Rectangle(rect);
+	dc.Ellipse(200, 100, 500, 200);*/
+
+
+	// 02
 	dc.Rectangle(0, 0, 200, 100);
-	dc.Ellipse(200, 100, 500, 200);
-	
+	CRect rect;
+	CWnd::GetClientRect(&rect);
+	dc.Ellipse(&rect);
+
 	// Do not call CWnd::OnPaint() for painting messages
 }
 
