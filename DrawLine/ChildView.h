@@ -31,6 +31,7 @@ public:
 	// Generated message map functions
 protected:
 	afx_msg void OnPaint();
+	POINT points[];
 	DECLARE_MESSAGE_MAP()
 };
 

@@ -1,4 +1,4 @@
-
+﻿
 // ChildView.cpp : implementation of the CChildView class
 //
 
@@ -16,6 +16,9 @@
 
 CChildView::CChildView()
 {
+	
+
+	
 }
 
 CChildView::~CChildView()
@@ -49,9 +52,20 @@ void CChildView::OnPaint()
 {
 	CPaintDC dc(this);
 
+	// 10
+	CDC m_dcMem;
+	CBitmap m_bitmap;
+
+	m_dcMem.CreateCompatibleDC(&dc); // 메모리 DC 생성
+	m_bitmap.CreateCompatibleBitmap(&dc, 256, 256); // 메모리 비트맵 생성
+	m_dcMem.SelectObject(&m_bitmap); // 비트맵 선택
+
 	for (int x = 0; x < 256; x++)
 		for (int y = 0; y < 256; y++)
-			dc.SetPixelV(x, y, RGB(x, y, 0));
+			m_dcMem.SetPixelV(x, y, RGB(x, y, 0));
+	
+	dc.BitBlt(350, 10, 256, 256,
+		&m_dcMem, 0, 0, SRCCOPY);
 }
 
 
