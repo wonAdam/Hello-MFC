@@ -4,7 +4,7 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "Simple2.h"
+#include "ColorSelect.h"
 
 #include "MainFrm.h"
 
@@ -71,37 +71,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
 
-
-	/*CMenu menuMain;
-	menuMain.CreateMenu();
-
-	CMenu menuPopup;
-	menuPopup.CreatePopupMenu();
-
-	menuPopup.AppendMenuW(MF_STRING, 201, _T("빨간색(&R)"));
-	menuPopup.AppendMenuW(MF_STRING, 202, _T("초록색(&G)"));
-	menuPopup.AppendMenuW(MF_STRING, 203, _T("파란색(&B)"));
-
-	menuMain.AppendMenuW(MF_POPUP, (UINT)menuPopup.Detach(), _T("색상(&C)"));
-
-	SetMenu(&menuMain);
-	menuMain.Detach();*/
-
-	CMenu Popup1;
-	Popup1.CreatePopupMenu();
-	Popup1.AppendMenuW(MF_STRING, 301, _T("1"));
-	Popup1.AppendMenuW(MF_STRING, 302, _T("2"));
-	Popup1.AppendMenuW(MF_STRING, 303, _T("3"));
-	Popup1.AppendMenuW(MF_STRING, 304, _T("4"));
-
-	CMenu Popup2;
-	Popup2.CreatePopupMenu();
-	Popup2.AppendMenuW(MF_STRING | MF_CHECKED, 201, _T("항목&1"));
-	Popup2.AppendMenuW(MF_POPUP, (UINT)Popup1.Detach(), _T("항목&2"));
-	Popup2.AppendMenuW(MF_STRING, 203, _T("항목&3"));
-
-	CMenu* pTopLevel = GetMenu();
-	pTopLevel->AppendMenuW(MF_POPUP, (UINT)Popup2.Detach(), _T("Test(&T)"));
 
 	return 0;
 }
