@@ -37,5 +37,9 @@ public:
 	afx_msg void OnColorBlue();
 	afx_msg void OnColorGreen();
 	afx_msg void OnColorRed();
+	afx_msg void OnUpdateColorBlue(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateColorGreen(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateColorRed(CCmdUI* pCmdUI);
+	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
 };
 

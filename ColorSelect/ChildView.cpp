@@ -29,6 +29,10 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_COLOR_BLUE, &CChildView::OnColorBlue)
 	ON_COMMAND(ID_COLOR_GREEN, &CChildView::OnColorGreen)
 	ON_COMMAND(ID_COLOR_RED, &CChildView::OnColorRed)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_BLUE, &CChildView::OnUpdateColorBlue)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_GREEN, &CChildView::OnUpdateColorGreen)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_RED, &CChildView::OnUpdateColorRed)
+	ON_WM_CONTEXTMENU()
 END_MESSAGE_MAP()
 
 
@@ -83,4 +87,32 @@ void CChildView::OnColorRed()
 {
 	m_color = RGB(255, 0, 0);
 	Invalidate();
+}
+
+
+void CChildView::OnUpdateColorRed(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_color == RGB(255, 0, 0));
+}
+
+void CChildView::OnUpdateColorGreen(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_color == RGB(0, 255, 0));
+}
+
+void CChildView::OnUpdateColorBlue(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_color == RGB(0, 0, 255));
+}
+
+
+void CChildView::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
+{
+	CMenu menu;
+	menu.LoadMenuW(IDR_MAINFRAME);
+	CMenu* pMenu = menu.GetSubMenu(4);
+	pMenu->TrackPopupMenu(
+		TPM_LEFTALIGN | TPM_LEFTBUTTON,
+		point.x, point.y, AfxGetMainWnd()
+	);
 }
