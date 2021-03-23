@@ -14,11 +14,14 @@
 
 // CMainFrame
 
+
 IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
+	ON_WM_DESTROY()
+	ON_MESSAGE(WM_TRAY_NOTIFICATION, &CChildView::OnTrayNotification)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -39,6 +42,7 @@ CMainFrame::CMainFrame() noexcept
 CMainFrame::~CMainFrame()
 {
 }
+
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -71,6 +75,18 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
 
+	NOTIFYICONDATA nid;
+	::ZeroMemory(&nid, sizeof(nid));
+	nid.cbSize = sizeof(nid);
+	nid.uID = 0;
+	nid.hWnd = GetSafeHwnd();
+
+	nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE;
+	nid.hIcon = AfxGetApp()->LoadIconW(IDR_MAINFRAME);
+	lstrcpy(nid.szTip, _T("내 트레이"));
+	nid.uCallbackMessage = WM_TRAY_NOTIFICATION;
+
+	BOOL bRet = ::Shell_NotifyIcon(NIM_ADD, &nid);
 
 	return 0;
 }
@@ -120,3 +136,16 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+
+
+void CMainFrame::OnDestroy()
+{
+	CFrameWnd::OnDestroy();
+
+	NOTIFYICONDATA nid;
+	::ZeroMemory(&nid, sizeof(nid));
+	nid.cbSize = sizeof(nid);
+	nid.uID = 0;
+	nid.hWnd = GetSafeHwnd();
+	BOOL bRet = ::Shell_NotifyIcon(NIM_DELETE, &nid);
+}

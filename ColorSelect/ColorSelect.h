@@ -14,6 +14,7 @@
 // See ColorSelect.cpp for the implementation of this class
 //
 
+#define WM_TRAY_NOTIFICATION WM_APP+1
 class CColorSelectApp : public CWinApp
 {
 public:

@@ -116,3 +116,36 @@ void CChildView::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 		point.x, point.y, AfxGetMainWnd()
 	);
 }
+
+afx_msg LRESULT CChildView::OnTrayNotification(WPARAM wParam, LPARAM lParam)
+{
+	switch (lParam)
+	{
+		case WM_RBUTTONDOWN:
+		{
+			CPoint ptMouse;
+			::GetCursorPos(&ptMouse);
+
+			CMenu menu;
+			menu.LoadMenuW(IDR_MAINFRAME);
+			CMenu* pMenu = menu.GetSubMenu(4);
+			pMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+				ptMouse.x, ptMouse.y, AfxGetMainWnd());
+			break;
+		}
+		case WM_LBUTTONDOWN:
+		{
+			SendMessage(WM_CANCELMODE);
+			break;
+		}
+		case WM_LBUTTONDBLCLK:
+		{
+			::ShowWindow(GetSafeHwnd(), SW_SHOWNORMAL);
+			break;
+		}
+
+
+	}
+
+	return 1;
+}
