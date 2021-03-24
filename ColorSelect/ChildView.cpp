@@ -29,6 +29,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_COLOR_BLUE, &CChildView::OnColorBlue)
 	ON_COMMAND(ID_COLOR_GREEN, &CChildView::OnColorGreen)
 	ON_COMMAND(ID_COLOR_RED, &CChildView::OnColorRed)
+	ON_COMMAND(ID_COLOR_NONE, &CChildView::OnColorNone)
 	ON_UPDATE_COMMAND_UI(ID_COLOR_BLUE, &CChildView::OnUpdateColorBlue)
 	ON_UPDATE_COMMAND_UI(ID_COLOR_GREEN, &CChildView::OnUpdateColorGreen)
 	ON_UPDATE_COMMAND_UI(ID_COLOR_RED, &CChildView::OnUpdateColorRed)
@@ -89,6 +90,12 @@ void CChildView::OnColorRed()
 	Invalidate();
 }
 
+void CChildView::OnColorNone()
+{
+	m_color = RGB(255, 255, 255);
+	Invalidate();
+}
+
 
 void CChildView::OnUpdateColorRed(CCmdUI* pCmdUI)
 {
@@ -104,6 +111,7 @@ void CChildView::OnUpdateColorBlue(CCmdUI* pCmdUI)
 {
 	pCmdUI->SetCheck(m_color == RGB(0, 0, 255));
 }
+
 
 
 void CChildView::OnContextMenu(CWnd* /*pWnd*/, CPoint point)

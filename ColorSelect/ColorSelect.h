@@ -15,6 +15,7 @@
 //
 
 #define WM_TRAY_NOTIFICATION WM_APP+1
+#define WM_COLOR_NONE WM_APP+2
 class CColorSelectApp : public CWinApp
 {
 public:
