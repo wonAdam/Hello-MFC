@@ -1,5 +1,5 @@
 
-// FileIOTestDoc.cpp : implementation of the CFileIOTestDoc class
+// InputSaveLoadDoc.cpp : implementation of the CInputSaveLoadDoc class
 //
 
 #include "pch.h"
@@ -7,10 +7,10 @@
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
-#include "FileIOTest.h"
+#include "InputSaveLoad.h"
 #endif
 
-#include "FileIOTestDoc.h"
+#include "InputSaveLoadDoc.h"
 
 #include <propkey.h>
 
@@ -18,27 +18,31 @@
 #define new DEBUG_NEW
 #endif
 
-// CFileIOTestDoc
+// CInputSaveLoadDoc
 
-IMPLEMENT_DYNCREATE(CFileIOTestDoc, CDocument)
+IMPLEMENT_DYNCREATE(CInputSaveLoadDoc, CDocument)
 
-BEGIN_MESSAGE_MAP(CFileIOTestDoc, CDocument)
+BEGIN_MESSAGE_MAP(CInputSaveLoadDoc, CDocument)
+	ON_COMMAND(ID_STYLE_ITALIC, &CInputSaveLoadDoc::OnStyleItalic)
+	ON_UPDATE_COMMAND_UI(ID_STYLE_ITALIC, &CInputSaveLoadDoc::OnUpdateStyleItalic)
+	ON_COMMAND(ID_STYLE_UNDERLINE, &CInputSaveLoadDoc::OnStyleUnderline)
+	ON_UPDATE_COMMAND_UI(ID_STYLE_UNDERLINE, &CInputSaveLoadDoc::OnUpdateStyleUnderline)
 END_MESSAGE_MAP()
 
 
-// CFileIOTestDoc construction/destruction
+// CInputSaveLoadDoc construction/destruction
 
-CFileIOTestDoc::CFileIOTestDoc() noexcept
+CInputSaveLoadDoc::CInputSaveLoadDoc() noexcept
 {
 	// TODO: add one-time construction code here
 
 }
 
-CFileIOTestDoc::~CFileIOTestDoc()
+CInputSaveLoadDoc::~CInputSaveLoadDoc()
 {
 }
 
-BOOL CFileIOTestDoc::OnNewDocument()
+BOOL CInputSaveLoadDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
@@ -46,30 +50,37 @@ BOOL CFileIOTestDoc::OnNewDocument()
 	// TODO: add reinitialization code here
 	// (SDI documents will reuse this document)
 
+	m_str.RemoveAll();
+	m_bItalic = m_bUnderline = FALSE;
+
 	return TRUE;
 }
 
 
 
 
-// CFileIOTestDoc serialization
+// CInputSaveLoadDoc serialization
 
-void CFileIOTestDoc::Serialize(CArchive& ar)
+void CInputSaveLoadDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		m_data.Serialize(ar);
+		// TODO: add storing code here
+		ar << m_bItalic << m_bUnderline;
+		m_str.Serialize(ar);
 	}
 	else
 	{
-		m_data.Serialize(ar);
+		// TODO: add loading code here
+		ar >> m_bItalic >> m_bUnderline;
+		m_str.Serialize(ar);
 	}
 }
 
 #ifdef SHARED_HANDLERS
 
 // Support for thumbnails
-void CFileIOTestDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
+void CInputSaveLoadDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
 	// Modify this code to draw the document's data
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
@@ -90,7 +101,7 @@ void CFileIOTestDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 }
 
 // Support for Search Handlers
-void CFileIOTestDoc::InitializeSearchContent()
+void CInputSaveLoadDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
 	// Set search contents from document's data.
@@ -100,7 +111,7 @@ void CFileIOTestDoc::InitializeSearchContent()
 	SetSearchContent(strSearchContent);
 }
 
-void CFileIOTestDoc::SetSearchContent(const CString& value)
+void CInputSaveLoadDoc::SetSearchContent(const CString& value)
 {
 	if (value.IsEmpty())
 	{
@@ -120,19 +131,47 @@ void CFileIOTestDoc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// CFileIOTestDoc diagnostics
+// CInputSaveLoadDoc diagnostics
 
 #ifdef _DEBUG
-void CFileIOTestDoc::AssertValid() const
+void CInputSaveLoadDoc::AssertValid() const
 {
 	CDocument::AssertValid();
 }
 
-void CFileIOTestDoc::Dump(CDumpContext& dc) const
+void CInputSaveLoadDoc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
 
 
-// CFileIOTestDoc commands
+// CInputSaveLoadDoc commands
+
+
+void CInputSaveLoadDoc::OnStyleItalic()
+{
+	m_bItalic = !m_bItalic;
+	SetModifiedFlag();
+	UpdateAllViews(NULL);
+}
+
+
+void CInputSaveLoadDoc::OnUpdateStyleItalic(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_bItalic == TRUE);
+}
+
+
+void CInputSaveLoadDoc::OnStyleUnderline()
+{
+	m_bUnderline = !m_bUnderline;
+	SetModifiedFlag();
+	UpdateAllViews(NULL);
+}
+
+
+void CInputSaveLoadDoc::OnUpdateStyleUnderline(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_bUnderline == TRUE);
+}

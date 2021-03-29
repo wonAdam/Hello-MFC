@@ -1,51 +1,21 @@
 
-// FileIOTestDoc.h : interface of the CFileIOTestDoc class
+// InputSaveLoadDoc.h : interface of the CInputSaveLoadDoc class
 //
 
 
 #pragma once
+#include <afxtempl.h>
 
-class CMyData : public CObject
-{
-	DECLARE_SERIAL(CMyData)
-public:
-	CString m_str;
-	COLORREF m_color;
-
-public:
-	CMyData() {}
-	CMyData(CString& str, COLORREF& color) { m_str = str; m_color = color; }
-	virtual ~CMyData();
-	void Serialize(CArchive& ar);
-};
-
-CMyData::~CMyData() {}
-
-void CMyData::Serialize(CArchive& ar)
-{
-	CObject::Serialize(ar);
-
-	if (ar.IsStoring())
-	{
-		ar << m_str << m_color;
-	}
-	else {
-		ar >> m_str >> m_color;
-	}
-}
-
-IMPLEMENT_SERIAL(CMyData, CObject, 1);
-
-
-class CFileIOTestDoc : public CDocument
+class CInputSaveLoadDoc : public CDocument
 {
 protected: // create from serialization only
-	CFileIOTestDoc() noexcept;
-	DECLARE_DYNCREATE(CFileIOTestDoc)
+	CInputSaveLoadDoc() noexcept;
+	DECLARE_DYNCREATE(CInputSaveLoadDoc)
 
 // Attributes
 public:
-	CMyData m_data;
+	CArray<TCHAR, TCHAR> m_str;
+	BOOL m_bItalic, m_bUnderline;
 
 // Operations
 public:
@@ -61,7 +31,7 @@ public:
 
 // Implementation
 public:
-	virtual ~CFileIOTestDoc();
+	virtual ~CInputSaveLoadDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -77,5 +47,9 @@ protected:
 	// Helper function that sets search content for a Search Handler
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
+public:
+	afx_msg void OnStyleItalic();
+	afx_msg void OnUpdateStyleItalic(CCmdUI* pCmdUI);
+	afx_msg void OnStyleUnderline();
+	afx_msg void OnUpdateStyleUnderline(CCmdUI* pCmdUI);
 };
-

@@ -27,6 +27,8 @@ BEGIN_MESSAGE_MAP(CFileIOTestView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_RBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CFileIOTestView construction/destruction
@@ -106,3 +108,79 @@ CFileIOTestDoc* CFileIOTestView::GetDocument() const // non-debug version is inl
 
 
 // CFileIOTestView message handlers
+
+
+//void CFileIOTestView::OnLButtonDown(UINT nFlags, CPoint point)
+//{
+//	CFile file;
+//	CFileException e;
+//	if (!file.Open(_T("mytest.dat"), CFile.modeWrite | CFile::modeCreate, &e))
+//	{
+//		e.ReportError();
+//		return;
+//	}
+//
+//	double a = 1.23;
+//	double b = 4.56;
+//	file.Write(&a, sizeof(a));
+//	file.Write(&b, sizeof(b));
+//
+//	CView::OnLButtonDown(nFlags, point);
+//}
+//
+//
+//void CFileIOTestView::OnRButtonDown(UINT nFlags, CPoint point)
+//{
+//	CFile file;
+//	CFileException e;
+//	if (!file.Open(_T("mytest.dat"), CFile::modeRead, &e))
+//	{
+//		e.ReportError();
+//		return;
+//	}
+//
+//	double a, b;
+//	file.Read(&a, sizeof(a));
+//	file.Read(&b, sizeof(b));
+//	TRACE(_T("a = %f, b = %f\n"), a, b);
+//
+//	CView::OnRButtonDown(nFlags, point);
+//}
+
+void CFileIOTestView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	CFile file;
+	CFileException e;
+	if (!file.Open(_T("mytest.dat"), CFile::modeWrite | CFile::modeCreate, &e))
+	{
+		e.ReportError();
+		return;
+	}
+
+	double a = 1.23;
+	double b = 4.56;
+	CArchive ar(&file, CArchive::store);
+	ar << a << b;
+
+	CView::OnLButtonDown(nFlags, point);
+}
+
+
+void CFileIOTestView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	CFile file;
+	CFileException e;
+	if (!file.Open(_T("mytest.dat"), CFile::modeRead, &e))
+	{
+		e.ReportError();
+		return;
+	}
+
+	double a, b;
+	CArchive ar(&file, CArchive::load);
+	ar >> a >> b;
+
+	TRACE(_T("a = %f, b = %f\n"), a, b);
+
+	CView::OnRButtonDown(nFlags, point);
+}

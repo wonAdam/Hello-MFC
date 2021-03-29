@@ -1,19 +1,19 @@
 
-// FileIOTestView.h : interface of the CFileIOTestView class
+// InputSaveLoadView.h : interface of the CInputSaveLoadView class
 //
 
 #pragma once
 
 
-class CFileIOTestView : public CView
+class CInputSaveLoadView : public CView
 {
 protected: // create from serialization only
-	CFileIOTestView() noexcept;
-	DECLARE_DYNCREATE(CFileIOTestView)
+	CInputSaveLoadView() noexcept;
+	DECLARE_DYNCREATE(CInputSaveLoadView)
 
 // Attributes
 public:
-	CFileIOTestDoc* GetDocument() const;
+	CInputSaveLoadDoc* GetDocument() const;
 
 // Operations
 public:
@@ -29,7 +29,7 @@ protected:
 
 // Implementation
 public:
-	virtual ~CFileIOTestView();
+	virtual ~CInputSaveLoadView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -41,12 +41,11 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
-#ifndef _DEBUG  // debug version in FileIOTestView.cpp
-inline CFileIOTestDoc* CFileIOTestView::GetDocument() const
-   { return reinterpret_cast<CFileIOTestDoc*>(m_pDocument); }
+#ifndef _DEBUG  // debug version in InputSaveLoadView.cpp
+inline CInputSaveLoadDoc* CInputSaveLoadView::GetDocument() const
+   { return reinterpret_cast<CInputSaveLoadDoc*>(m_pDocument); }
 #endif
 
